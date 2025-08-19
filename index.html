@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingSpeed - MonkeyType Clone</title>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with best WPM -->
+        <header>
+            <div class="logo">TypingSpeed</div>
+            <div class="best-wpm">
+                <span>Best: <span id="best-wpm">0</span> WPM</span>
+            </div>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel">
+            <div class="mode-section">
+                <div class="mode-group">
+                    <button class="mode-btn active" data-mode="time">time</button>
+                    <button class="mode-btn" data-mode="words">words</button>
+                </div>
+                <div class="options-group" id="time-options">
+                    <button class="option-btn" data-value="15">15</button>
+                    <button class="option-btn" data-value="30">30</button>
+                    <button class="option-btn active" data-value="60">60</button>
+                    <button class="option-btn" data-value="120">120</button>
+                </div>
+                <div class="options-group hidden" id="word-options">
+                    <button class="option-btn active" data-value="10">10</button>
+                    <button class="option-btn" data-value="25">25</button>
+                    <button class="option-btn" data-value="50">50</button>
+                    <button class="option-btn" data-value="100">100</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Typing Area -->
+        <div class="typing-container">
+            <div class="typing-area" id="typing-area">
+                <!-- Words will be dynamically generated here -->
+            </div>
+            <input type="text" id="typing-input" class="typing-input" autocomplete="off" autocorrect="off" spellcheck="false">
+        </div>
+
+        <!-- Live Stats -->
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-label">WPM</div>
+                <div class="stat-value" id="live-wpm">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">ACC</div>
+                <div class="stat-value" id="live-accuracy">100%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">TIME</div>
+                <div class="stat-value" id="live-timer">60</div>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button id="start-btn" class="control-btn primary">Start Test</button>
+            <button id="restart-btn" class="control-btn">Restart</button>
+        </div>
+
+        <!-- Results Modal -->
+        <div class="results-modal hidden" id="results-modal">
+            <div class="results-content">
+                <h2>Test Complete!</h2>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">WPM</div>
+                        <div class="result-value" id="final-wpm">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Accuracy</div>
+                        <div class="result-value" id="final-accuracy">100%</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Characters</div>
+                        <div class="result-value" id="final-chars">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Correct Words</div>
+                        <div class="result-value" id="final-correct">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Incorrect Words</div>
+                        <div class="result-value" id="final-incorrect">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Time</div>
+                        <div class="result-value" id="final-time">60s</div>
+                    </div>
+                </div>
+                <button id="close-results" class="control-btn primary">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+</html>
