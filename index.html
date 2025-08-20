@@ -14,12 +14,26 @@
         <!-- Header with best WPM -->
         <header>
             <div class="logo">TypingSpeed</div>
-            <div class="best-wpm">
-                <span>Best: <span id="best-wpm">0</span> WPM</span>
+            <div class="header-controls">
+                <div class="theme-selector">
+                    <select id="theme-select">
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                        <option value="serika">Serika</option>
+                        <option value="laser">Laser</option>
+                        <option value="botanical">Botanical</option>
+                    </select>
+                </div>
+                <button id="sound-toggle" class="sound-btn" title="Toggle Sound">
+                    <span class="sound-icon">🔊</span>
+                </button>
+                <div class="best-wpm">
+                    <span>Best: <span id="best-wpm">0</span> WPM</span>
+                </div>
+                <button id="achievements-btn" class="achievements-btn" title="View Achievements">
+                    <span class="achievement-icon">🏆</span>
+                </button>
             </div>
-            <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-                <span class="theme-icon">🌙</span>
-            </button>
         </header>
 
         <!-- Settings Panel -->
@@ -28,6 +42,9 @@
                 <div class="mode-group">
                     <button class="mode-btn active" data-mode="time">time</button>
                     <button class="mode-btn" data-mode="words">words</button>
+                    <button class="mode-btn" data-mode="quote">quote</button>
+                    <button class="mode-btn" data-mode="numbers">numbers</button>
+                    <button class="mode-btn" data-mode="punctuation">punctuation</button>
                 </div>
                 <div class="options-group" id="time-options">
                     <button class="option-btn" data-value="15">15</button>
@@ -40,6 +57,11 @@
                     <button class="option-btn" data-value="25">25</button>
                     <button class="option-btn" data-value="50">50</button>
                     <button class="option-btn" data-value="100">100</button>
+                </div>
+                <div class="options-group hidden" id="quote-options">
+                    <button class="option-btn active" data-value="short">Short</button>
+                    <button class="option-btn" data-value="medium">Medium</button>
+                    <button class="option-btn" data-value="long">Long</button>
                 </div>
             </div>
         </div>
@@ -66,6 +88,18 @@
                 <div class="stat-label">TIME</div>
                 <div class="stat-value" id="live-timer">60</div>
             </div>
+            <div class="stat-item">
+                <div class="stat-label">CHARS</div>
+                <div class="stat-value" id="live-chars">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">ERRORS</div>
+                <div class="stat-value" id="live-errors">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">CPM</div>
+                <div class="stat-value" id="live-cpm">0</div>
+            </div>
         </div>
 
         <!-- Control Buttons -->
@@ -75,7 +109,21 @@
         </div>
 
         <!-- Results Modal -->
-        <div class="results-modal hidden" id="results-modal">
+                <!-- Achievements Modal -->
+        <div id="achievements-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🏆 Achievements</h2>
+                    <button id="close-achievements" class="close-btn">&times;</button>
+                </div>
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- Achievements will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Modal -->
+        <div id="results-modal" class="modal hidden">
             <div class="results-content">
                 <h2>Test Complete!</h2>
                 <div class="results-grid">
