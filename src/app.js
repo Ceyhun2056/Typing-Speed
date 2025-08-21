@@ -192,6 +192,10 @@ class TypingTest {
         // Initialize sound system
         this.initSounds();
         this.initSoundButton();
+        
+        // Initialize button states
+        this.startBtn.style.display = 'inline-block';
+        this.restartBtn.style.display = 'none';
     }
     
     // Simple sound effects using Web Audio API
@@ -458,7 +462,8 @@ class TypingTest {
         this.liveTimer.style.animation = '';
         
         this.typingArea.classList.add('active');
-        this.startBtn.disabled = true;
+        this.startBtn.style.display = 'none'; // Hide start button
+        this.restartBtn.style.display = 'inline-block'; // Show restart button
         this.focusInput();
         
         if (this.mode === 'time') {
@@ -501,6 +506,11 @@ class TypingTest {
     }
 
     handleInput(e) {
+        // Start test automatically on first keystroke
+        if (!this.isActive && !this.isFinished) {
+            this.startTest();
+        }
+        
         if (!this.isActive || this.isFinished) return;
         
         const inputValue = e.target.value;
@@ -676,7 +686,8 @@ class TypingTest {
         }
         
         this.typingArea.classList.remove('active');
-        this.startBtn.disabled = false;
+        this.startBtn.style.display = 'none'; // Keep start button hidden
+        this.restartBtn.style.display = 'inline-block'; // Keep restart visible
         this.typingInput.blur();
         
         this.showResults();
@@ -726,7 +737,8 @@ class TypingTest {
         }
         
         this.typingArea.classList.remove('active');
-        this.startBtn.disabled = false;
+        this.startBtn.style.display = 'inline-block'; // Show start button again
+        this.restartBtn.style.display = 'none'; // Hide restart button
         this.closeResultsModal();
         
         this.generateTest();
