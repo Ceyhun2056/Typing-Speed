@@ -157,7 +157,7 @@ const achievements = [
 // Application State
 class TypingTest {
     constructor() {
-        this.mode = 'time'; // 'time', 'words', 'quote', 'numbers', 'punctuation'
+        this.mode = 'words'; // 'time', 'words', 'quote', 'numbers', 'punctuation'
         this.timeLimit = 60; // in seconds
         this.wordLimit = 10; // number of words
         this.quoteLength = 'short'; // 'short', 'medium', 'long'
@@ -187,7 +187,6 @@ class TypingTest {
         this.initializeEventListeners();
         this.loadBestWPM();
         this.setTheme(this.theme);
-        this.generateTest();
         
         // Initialize sound system
         this.initSounds();
@@ -377,6 +376,10 @@ class TypingTest {
     }
 
     renderWords() {
+        if (!this.typingArea) {
+            return;
+        }
+        
         this.typingArea.innerHTML = '';
         this.words.forEach((word, wordIndex) => {
             const wordElement = document.createElement('div');
@@ -1023,7 +1026,15 @@ class TypingTest {
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new TypingTest();
+    const typingTest = new TypingTest();
+    
+    // Force trigger by simulating a click on the words button
+    setTimeout(() => {
+        const wordsButton = document.querySelector('[data-mode="words"]');
+        if (wordsButton) {
+            wordsButton.click();
+        }
+    }, 300);
 });
 
 // Add pulse animation for best WPM
