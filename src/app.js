@@ -195,6 +195,20 @@ class TypingTest {
         // Initialize button states
         this.startBtn.style.display = 'inline-block';
         this.restartBtn.style.display = 'none';
+        
+        // Set up initial mode and options properly
+        
+        // Force generate words for initial display
+        this.words = this.generateWords(10);
+        this.renderWords();
+        this.resetStats();
+        
+        // Then set mode and option to ensure UI is in sync
+        this.setMode('words');
+        this.setOption('10');
+        
+        // Disable typing input until start button is clicked
+        this.typingInput.disabled = true;
     }
     
     // Simple sound effects using Web Audio API
@@ -464,6 +478,9 @@ class TypingTest {
         this.liveTimer.style.fontWeight = '';
         this.liveTimer.style.animation = '';
         
+        // Enable typing input
+        this.typingInput.disabled = false;
+        
         this.typingArea.classList.add('active');
         this.startBtn.style.display = 'none'; // Hide start button
         this.restartBtn.style.display = 'inline-block'; // Show restart button
@@ -509,11 +526,7 @@ class TypingTest {
     }
 
     handleInput(e) {
-        // Start test automatically on first keystroke
-        if (!this.isActive && !this.isFinished) {
-            this.startTest();
-        }
-        
+        // Don't auto-start anymore - require manual start button click
         if (!this.isActive || this.isFinished) return;
         
         const inputValue = e.target.value;
@@ -738,6 +751,9 @@ class TypingTest {
             clearInterval(this.timer);
             this.timer = null;
         }
+        
+        // Disable typing input until start button is clicked again
+        this.typingInput.disabled = true;
         
         this.typingArea.classList.remove('active');
         this.startBtn.style.display = 'inline-block'; // Show start button again
@@ -1028,13 +1044,11 @@ class TypingTest {
 document.addEventListener('DOMContentLoaded', () => {
     const typingTest = new TypingTest();
     
-    // Force trigger by simulating a click on the words button
+    // Ensure words are displayed after everything is initialized
     setTimeout(() => {
-        const wordsButton = document.querySelector('[data-mode="words"]');
-        if (wordsButton) {
-            wordsButton.click();
-        }
-    }, 300);
+        typingTest.words = typingTest.generateWords(10);
+        typingTest.renderWords();
+    }, 100);
 });
 
 // Add pulse animation for best WPM

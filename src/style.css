@@ -322,9 +322,12 @@ header {
 }
 
 .letter.incorrect {
-  color: var(--incorrect);
-  background: rgba(239, 68, 68, 0.2);
-  border-radius: 0.1rem;
+  color: #ffffff;
+  background: #ef4444;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.2rem;
+  margin: 0 0.05rem;
+  font-weight: 500;
 }
 
 .letter.current {
@@ -336,9 +339,13 @@ header {
 }
 
 .letter.extra {
-  color: var(--incorrect);
-  background: rgba(239, 68, 68, 0.15);
-  border-radius: 0.1rem;
+  color: #ffffff;
+  background: #ef4444;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.2rem;
+  margin: 0 0.05rem;
+  font-weight: 500;
+  text-decoration: underline;
 }
 
 @keyframes blink {
