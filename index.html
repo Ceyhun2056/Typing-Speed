@@ -1,162 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypingSpeed - MonkeyType Clone</title>
-    <link rel="stylesheet" href="src/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing-Speed</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div class="container">
-        <!-- Header with best WPM -->
-        <header>
-            <div class="logo">TypingSpeed</div>
-            <div class="header-controls">
-                <div class="theme-selector">
-                    <select id="theme-select">
-                        <option value="dark">Dark</option>
-                        <option value="light">Light</option>
-                        <option value="serika">Serika</option>
-                        <option value="laser">Laser</option>
-                        <option value="botanical">Botanical</option>
-                    </select>
-                </div>
-                <button id="sound-toggle" class="sound-btn" title="Toggle Sound">
-                    <span class="sound-icon">🔊</span>
-                </button>
-                <div class="best-wpm">
-                    <span>Best: <span id="best-wpm">0</span> WPM</span>
-                </div>
-                <button id="achievements-btn" class="achievements-btn" title="View Achievements">
-                    <span class="achievement-icon">🏆</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- Settings Panel -->
-        <div class="settings-panel">
-            <div class="mode-section">
-                <div class="mode-group">
-                    <button class="mode-btn active" data-mode="words">words</button>
-                    <button class="mode-btn" data-mode="time">time</button>
-                    <button class="mode-btn" data-mode="quote">quote</button>
-                    <button class="mode-btn" data-mode="numbers">numbers</button>
-                    <button class="mode-btn" data-mode="punctuation">punctuation</button>
-                </div>
-                <div class="options-group hidden" id="time-options">
-                    <button class="option-btn" data-value="15">15</button>
-                    <button class="option-btn" data-value="30">30</button>
-                    <button class="option-btn active" data-value="60">60</button>
-                    <button class="option-btn" data-value="120">120</button>
-                </div>
-                <div class="options-group" id="word-options">
-                    <button class="option-btn active" data-value="10">10</button>
-                    <button class="option-btn" data-value="25">25</button>
-                    <button class="option-btn" data-value="50">50</button>
-                    <button class="option-btn" data-value="100">100</button>
-                </div>
-                <div class="options-group hidden" id="quote-options">
-                    <button class="option-btn active" data-value="short">Short</button>
-                    <button class="option-btn" data-value="medium">Medium</button>
-                    <button class="option-btn" data-value="long">Long</button>
-                </div>
-            </div>
+        <h1>Typing-Speed</h1>
+        <div class="stats">
+            <p>WPM: <span id="wpm">0</span></p>
+            <p>Accuracy: <span id="accuracy">100%</span></p>
+            <p>Time Left: <span id="time">60</span>s</p>
         </div>
 
-        <!-- Main Typing Area -->
-        <div class="typing-container">
-            <div class="typing-area" id="typing-area">
-                <!-- Words will be dynamically generated here -->
-            </div>
-            <input type="text" id="typing-input" class="typing-input" autocomplete="off" autocorrect="off" spellcheck="false">
-        </div>
+        <div id="word-box"></div>
 
-        <!-- Live Stats -->
-        <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-label">WPM</div>
-                <div class="stat-value" id="live-wpm">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">ACC</div>
-                <div class="stat-value" id="live-accuracy">100%</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">TIME</div>
-                <div class="stat-value" id="live-timer">60</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">CHARS</div>
-                <div class="stat-value" id="live-chars">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">ERRORS</div>
-                <div class="stat-value" id="live-errors">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">CPM</div>
-                <div class="stat-value" id="live-cpm">0</div>
-            </div>
-        </div>
+        <input
+            type="text"
+            id="input"
+            placeholder="Start typing here..."
+            autofocus
+        />
 
-        <!-- Control Buttons -->
         <div class="controls">
-            <button id="start-btn" class="control-btn primary">Start</button>
-            <button id="restart-btn" class="control-btn">Restart</button>
-        </div>
-
-        <!-- Results Modal -->
-                <!-- Achievements Modal -->
-        <div id="achievements-modal" class="modal hidden">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>🏆 Achievements</h2>
-                    <button id="close-achievements" class="close-btn">&times;</button>
-                </div>
-                <div class="achievements-grid" id="achievements-grid">
-                    <!-- Achievements will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Results Modal -->
-        <div id="results-modal" class="modal hidden">
-            <div class="results-content">
-                <h2>Test Complete!</h2>
-                <div class="results-grid">
-                    <div class="result-item">
-                        <div class="result-label">WPM</div>
-                        <div class="result-value" id="final-wpm">0</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Accuracy</div>
-                        <div class="result-value" id="final-accuracy">100%</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Characters</div>
-                        <div class="result-value" id="final-chars">0</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Correct Words</div>
-                        <div class="result-value" id="final-correct">0</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Incorrect Words</div>
-                        <div class="result-value" id="final-incorrect">0</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Time</div>
-                        <div class="result-value" id="final-time">60s</div>
-                    </div>
-                </div>
-                <button id="close-results" class="control-btn primary">Try Again</button>
-            </div>
+            <button id="restart">Restart</button>
+            <select id="timeSelect">
+                <option value="30">30s</option>
+                <option value="60" selected>60s</option>
+                <option value="120">120s</option>
+            </select>
         </div>
     </div>
 
-    <script src="src/app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
